@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Growth rate and Migration in Portugal (1960-2022)</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .visualization {
+            display: none;
+        }
+        #controls {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Natural Growth rate and Migration in Portugal (1960-2022)</h1><br>
+    <p class="info">
+        The idea behind this data visualisation project is to visualise and combine the following variables: mortality rate, birth rate and migration in Portugal due to my interest in Portugal’s demographic situation as I am Portuguese and my parents are emigrants.<br>
+        The purpose of these visualisations is merely informative and to show a clear evolution from each year to the next. They can be used by researchers who wish to see the effect of migration on the national population. 
+        I used data from Pordata, the statistics database in Portugal, and I used the entire datasets available from 1960-2022 to get an understanding as extensive as possible of the evolution over time of these variables and their relation. Immigration is the only variable which I could not find data prior to 2008.<br>
+        The project consists in three data visualisations which can be seen individually by clicking on each button on the left.<br>
+        The first visualisation is an animation showing the mortality and birth rate across decades. To see a specific decade, hover on the legend on the right hand side.<br>
+        The second visusalisation shows the evolution of migration in time. By hovering on each point, the exact data is shown per year. <br>
+        The last visualisation is the main visualisation of this project as its aim is to see if there is a link between the decreasing birth rate, increasing mortality rate and the amount of people emigrating. The decreasing birth rate and increasing mortality rate is a national problem and I wanted to add the dimension of emigration to see its effect over time. I chose the variable of emigration because a lot of Portuguese people emigrate and it can be seen as a reason for Portugal’s demographic crisis. This bubble graph shows a relationship between the mortality rate (%) on the x axis, the birth rate (%) on the y axis, the number of emigrants per thousand inhabitants (bubble size) and the natural growth rate (bubble colour).<br> 
+        The key on the right-hand side gives an indication of the size of the bubbles and the colour gradient. To begin the animation, select 'Play', to pause select 'Pause' and 'Restart' at the end to view again. 
+    </p>
+
+    <!-- Buttons to Load Visualizations -->
+
+    <button class="button-91" role="button" onclick="showVisualization('d_b', 'd_b.js')">Mortality and Birth Rate in Portugal (1960-2022)</button><br>
+    <button class="button-91" role="button" onclick="showVisualization('migration', 'migration.js')">Emigration and Immigration in Portugal (2008-2022)</button><br>
+    <button class="button-91" role="button" onclick="showVisualization('main', 'main.js')">Mortality, Birth, Natural Population Growth and Emigration in Portugal (1960-2022)</button>
+
+    <!-- Visualization Containers -->
+    <div id="d_b" class="visualization"></div>
+    <div id="migration" class="visualization"></div>
+    <div id="main" class="visualization"></div>
+
+    <div id="legendsContainer">
+        <div id="emigrantsLegend"></div>
+        <div id="colorLegend"></div>
+    </div>
+    
+    <div id="controls">
+        <button id="button">Play</button>
+        <div id="yearLabel">1960</div>
+    </div>
+
+    <div id="tooltip" class="tooltip"></div>
+    
+    <script>
+        const loadedScripts = {};
+
+        function showVisualization(id, script) {
+            // Hide all visualizations
+            document.querySelectorAll('.visualization').forEach(vis => {
+                vis.style.display = 'none';
+            });
+
+            // Show the selected visualization
+            document.getElementById(id).style.display = 'block';
+
+            // Load the corresponding script if not already loaded
+            if (!loadedScripts[script]) {
+                const scriptElement = document.createElement('script');
+                scriptElement.src = script;
+                scriptElement.onload = function () {
+                    loadedScripts[script] = true;
+                };
+                document.body.appendChild(scriptElement);
+            }
+
+            // Show or hide the play button based on the selected visualization
+            const controls = document.getElementById('controls');
+            if (id === 'main') {
+                controls.style.display = 'block';
+            } else {
+                controls.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
