@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <style>
-        .visualization {
+        .visualisation {
             display: none;
         }
         #controls {
@@ -35,9 +35,9 @@
     <button class="button-91" role="button" onclick="showVisualization('main', 'main.js')">Mortality, Birth, Natural Population Growth and Emigration in Portugal (1960-2022)</button>
 
     <!-- Visualization Containers -->
-    <div id="d_b" class="visualization"></div>
-    <div id="migration" class="visualization"></div>
-    <div id="main" class="visualization"></div>
+    <div id="d_b" class="visualisation"></div>
+    <div id="migration" class="visualisation"></div>
+    <div id="main" class="visualisation"></div>
 
     <div id="legendsContainer">
         <div id="emigrantsLegend"></div>
@@ -56,11 +56,11 @@
 
         function showVisualization(id, script) {
             // Hide all visualizations
-            document.querySelectorAll('.visualization').forEach(vis => {
+            document.querySelectorAll('.visualisation').forEach(vis => {
                 vis.style.display = 'none';
             });
 
-            // Show the selected visualization
+            // Show the selected visualisation
             document.getElementById(id).style.display = 'block';
 
             // Load the corresponding script if not already loaded
@@ -73,7 +73,7 @@
                 document.body.appendChild(scriptElement);
             }
 
-            // Show or hide the play button based on the selected visualization
+            // Show or hide the play button based on the selected visualisation
             const controls = document.getElementById('controls');
             if (id === 'main') {
                 controls.style.display = 'block';
